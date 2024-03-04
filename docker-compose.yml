@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    command: bash -c "uvicorn sales_chat.main:app --reload --host 0.0.0.0 --port 8000"
+    volumes:
+      - .:/src
+    ports:
+      - "8000:8000"

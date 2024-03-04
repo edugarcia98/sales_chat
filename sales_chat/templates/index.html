@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat de vendas</title>
+</head>
+<body>
+    <h1>Conversa</h1>
+
+    {% for msg in messages %}
+        <p>{{ msg[0] }}: {{ msg[1] }}</p>
+    {% endfor %}
+
+    <form action="/" onsubmit="send_message()">
+        <textarea id="message" name="message" placeholder="Digite a mensagem"></textarea>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script>
+        function send_message() {
+            const input = document.getElementById("message");
+            const value = input.value;
+            const data = {"message": value};
+
+            const request = new XMLHttpRequest();
+
+            request.open("POST", "/chat", false);
+            request.setRequestHeader("Content-Type", "application/json");
+            request.send(JSON.stringify(data));
+        }
+    </script>
+</body>
+</html>
